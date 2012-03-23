@@ -17,21 +17,22 @@ At first require the gem.
 Set your manufacturer CPCID, postal code by calling the function setManufacturer  
 
   merchant = {
-    :merchantCPCID => CPC_DEMO_XML,      # use your merchantCPCID
-    :fromPostalCode => YOUR_POSTAL_CODE, # use your postal code from where the item will be shipped
+    :merchantCPCID => 'CPC_DEMO_XML',
+    :fromPostalCode => 'L1JK9',
     :turnAroundTime => 24,
-    :itemsPrice => 14                    # put the total cost of items to be shipped.
+    :itemsPrice => 14
   }
   cPost.setMerchant merchant
 
 Then set the Customer address in the format shown below, again in associative array format.
+
 *Note*: city and provOrState are optional. Only Postal Code and country is required. 
 
   customer = {
-    :city => 'Brampton',                 # customer city
-    :provOrState => 'Ontario',           # customer state or province
-    :country => 'CA',                    # 2 Digit Code, see Canada Post Specs for more Info
-    :postalCode => 'L1JK9'               # customer postal or ZIP Code
+    :city => 'Brampton',
+    :provOrState => 'Ontario,
+    :country => 'CA',        
+    :postalCode => 'L1JK9'   
   }
   cPost.setCustomer customer
 
@@ -53,5 +54,6 @@ Then, invoke the method below (returns XML format of details from Canada Post Se
        
 == License
 
-The gem is based on {CanadaPost PHP class}[http://github.com/itsalif/CanadaPost]
+The gem is based on {CanadaPost PHP class}[http://github.com/itsalif/CanadaPost].
+
 The script has been released under MIT License.
