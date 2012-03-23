@@ -6,7 +6,7 @@ require 'builder'
  
 class CanadaPost
 
-  def initialize :nodoc:
+  def initialize # :nodoc:
     @items = []
   end
 
@@ -74,7 +74,7 @@ class CanadaPost
     xml.eparcel do
       xml.language 'en'
       xml.ratesAndServicesRequest do
-        buildTags(xml, [:merchantCPCID, :fromPostalCode, :turnAroundTime, :itemsPrice], @merchantInfo])
+        buildTags(xml, [:merchantCPCID, :fromPostalCode, :turnAroundTime, :itemsPrice], @merchantInfo)
         xml.lineItems do
           @items.each do |item|
             xml.item do
@@ -83,7 +83,7 @@ class CanadaPost
             xml.readyToShip if item[:readyToShip]
           end
         end
-        buildTags(xml, [:city, :provOrState, :country, :postalCode], @customerInfo])
+        buildTags(xml, [:city, :provOrState, :country, :postalCode], @customerInfo)
       end
     end
     return xml.target!

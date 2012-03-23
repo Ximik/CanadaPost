@@ -30,7 +30,7 @@ Then set the Customer address in the format shown below, again in associative ar
 
   customer = {
     :city => 'Brampton',
-    :provOrState => 'Ontario,
+    :provOrState => 'Ontario',
     :country => 'CA',        
     :postalCode => 'L1JK9'   
   }

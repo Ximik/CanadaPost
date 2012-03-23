@@ -3,7 +3,7 @@
 Gem::Specification.new do |s|
   s.platform     = Gem::Platform::RUBY
   s.name         = 'canada_post'
-  s.version      = '0.1.0'
+  s.version      = '0.1.2'
   s.author       = 'Alex Tsokurov'
   s.email        = 'me@ximik.net'
   s.summary      = 'A Simple Ruby Class that communicates with Canada Post Server and provides a shipping estimate.'
