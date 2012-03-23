@@ -11,24 +11,24 @@ class CanadaPost
   end
 
   #
-  # This method sets the Merchant information
+  # This method sets the merchant information
   #     
-  def setMerchant(merchantInfo)
-    @merchantInfo = merchantInfo;
+  def setMerchant(merchant)
+    @merchantInfo = merchant;
   end  
   
   #
-  # This method sets the Customer Info
+  # This method sets the customer information
   #  
-  def setCustomer(customerInfo)
-    @customerInfo = customerInfo;
+  def setCustomer(customer)
+    @customerInfo = customer;
   end
   
   #
-  # This method allows you to Add items to be shipped
+  # This method allows you to add items to be shipped
   #  
-  def addItem(itemInfo)
-    @items << itemInfo;
+  def addItem(item)
+    @items << item;
   end    
   
   #
@@ -74,20 +74,29 @@ class CanadaPost
     xml.eparcel do
       xml.language 'en'
       xml.ratesAndServicesRequest do
-        xml.merchantCPCID 'CPC_DEMO_XML'
-        [:fromPostalCode, :turnAroundTime, :itemsPrice].each { |k| xml.method_missing k, @merchantInfo[k] }
+        buildTags(xml, [:merchantCPCID, :fromPostalCode, :turnAroundTime, :itemsPrice], @merchantInfo])
         xml.lineItems do
           @items.each do |item|
             xml.item do
-              [:quantity, :weight, :length, :width, :height, :description].each { |k| xml.method_missing k, item[k] }
+              buildTags(xml, [:quantity, :weight, :length, :width, :height, :description], item)
             end
             xml.readyToShip if item[:readyToShip]
           end
         end
-        [:city, :provOrState, :country, :postalCode].each { |k| xml.method_missing k, @customerInfo[k] }
+        buildTags(xml, [:city, :provOrState, :country, :postalCode], @customerInfo])
       end
     end
     return xml.target!
+  end
+  
+  #
+  # This method just build tags in right order.
+  #
+  def buildTags(xml, tags, hash)
+    tags.each do |t|
+      text = hash[t]
+      xml.method_missing t, text if text
+    end
   end
         
 end
